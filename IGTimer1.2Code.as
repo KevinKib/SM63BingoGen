@@ -1,6 +1,6 @@
 /**
  * ...
- * @author ...
+ * @author Runouw & Sekanor
  */
 class // frame6  
 {
