@@ -48,8 +48,8 @@ public class Interface extends javax.swing.JFrame {
         textArea = new javax.swing.JTextArea();
         jb_copyClipboard = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jm_file = new javax.swing.JMenu();
+        jmi_importGoals = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
 
         jCheckBoxMenuItem1.setSelected(true);
@@ -67,11 +67,16 @@ public class Interface extends javax.swing.JFrame {
         jMenu6.setText("Edit");
         jMenuBar3.add(jMenu6);
 
-        fileChooser.setDialogTitle("OpenDialog");
+        fileChooser.setDialogTitle("Import goals...");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jb_generateJSON.setText("Generate JSON");
+        jb_generateJSON.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jb_generateJSONMouseExited(evt);
+            }
+        });
         jb_generateJSON.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_generateJSONActionPerformed(evt);
@@ -94,17 +99,17 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("File");
+        jm_file.setText("File");
 
-        jMenuItem1.setText("Import goals...");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jmi_importGoals.setText("Import goals...");
+        jmi_importGoals.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jmi_importGoalsActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jm_file.add(jmi_importGoals);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jm_file);
 
         jMenu7.setText("About...");
         jMenuBar1.add(jMenu7);
@@ -146,13 +151,28 @@ public class Interface extends javax.swing.JFrame {
         
         //jTextField1.setText(BingoGen.get().generate());
         
-        BingoGen.get().generate();
+        Dimension size = jb_generateJSON.getSize();
         
         try {
-           textArea.setText(BingoGen.get().getSeed().getSeedLinebreak());
-        } catch (Exception e) {
-            System.out.println(e);
+            BingoGen.get().generate();
+            
+            try {
+                textArea.setText(BingoGen.get().getJsonSeed().getSeedLinebreak());
+            } catch (Exception e) {
+                System.out.println("dicks");
+                System.out.println(e);
+                
+            }
+            
+        } catch(NoImportedFileException e) {
+            jb_generateJSON.setText("No file.");
         }
+        
+        // Fixes the size of the button (bad)
+        jb_generateJSON.setSize(size);
+        jb_generateJSON.setPreferredSize(size);
+        jb_generateJSON.setMaximumSize(size); 
+        
         
     }//GEN-LAST:event_jb_generateJSONActionPerformed
 
@@ -164,8 +184,7 @@ public class Interface extends javax.swing.JFrame {
         try {
             BingoGen.get().copyToClipboard();
             jb_copyClipboard.setText("Copied !");  
-        }
-        catch(NoGeneratedJsonException e) {
+        } catch(NoGeneratedJsonException e) {
             jb_copyClipboard.setText("No JSON.");
         }
         
@@ -181,7 +200,7 @@ public class Interface extends javax.swing.JFrame {
         jb_copyClipboard.setText("Copy to Clipboard");
     }//GEN-LAST:event_jb_copyClipboardMouseExited
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jmi_importGoalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_importGoalsActionPerformed
         // TODO add your handling code here:
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -199,7 +218,12 @@ public class Interface extends javax.swing.JFrame {
         } else {
             System.out.println("File access cancelled by user.");
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jmi_importGoalsActionPerformed
+
+    private void jb_generateJSONMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_generateJSONMouseExited
+        // TODO add your handling code here:
+        jb_generateJSON.setText("Generate JSON");
+    }//GEN-LAST:event_jb_generateJSONMouseExited
 
     /**
      * @param args the command line arguments
@@ -242,7 +266,6 @@ public class Interface extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -251,11 +274,12 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuBar jMenuBar3;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jb_copyClipboard;
     private javax.swing.JButton jb_generateJSON;
+    private javax.swing.JMenu jm_file;
+    private javax.swing.JMenuItem jmi_importGoals;
     private javax.swing.JTextArea textArea;
     // End of variables declaration//GEN-END:variables
 }

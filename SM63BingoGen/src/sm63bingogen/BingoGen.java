@@ -22,8 +22,8 @@ public class BingoGen {
     private static BingoGen instance;
     // Goal list imported from the .txt file.
     private ArrayList<Goal> goalList;
-    // JSON seed object.
-    private JsonSeed seed;
+    // JSON jsonSeed object.
+    private JsonSeed jsonSeed;
     // Path of the goalList file.
     private String filepath;
     // Title of the window.
@@ -42,8 +42,8 @@ public class BingoGen {
         this.filepath = filepath;
     }
     
-    public JsonSeed getSeed() {
-        return seed;
+    public JsonSeed getJsonSeed() {
+        return jsonSeed;
     }
     
     public String getTitle() {
@@ -56,10 +56,10 @@ public class BingoGen {
      */
     private BingoGen() {
         this.goalList = new ArrayList<>();
-        this.seed = new JsonSeed();
+        this.jsonSeed = new JsonSeed();
         this.filepath = "";
         //this.filepath = "C:\\Users\\Kévin\\Documents\\GitHub\\SM63Hacks\\SM63BingoGen\\src\\sm63bingogen\\goalList.txt";
-        this.title = "SM63BingoGen 1.0-a4";
+        this.title = "SM63BingoGen 1.0-a5";
     }
     
     /**
@@ -68,7 +68,7 @@ public class BingoGen {
      * @throws FileNotFoundException
      * @throws IOException 
      */
-    public void importGoals(String filename) throws FileNotFoundException, IOException{
+    public void importGoals(String filename) throws FileNotFoundException, IOException {
         this.goalList.clear();
         
         // Code to read a small file
@@ -88,24 +88,32 @@ public class BingoGen {
             br.close();
         }
         
-        
     }
     
     /**
-     * Generates a new seed.
+     * Generates a new jsonSeed.
+     * @throws sm63bingogen.NoImportedFileException
      */
-    public void generate() {
+    public void generate() throws NoImportedFileException {
         
         // Import goals (only if it hasn't been done before)
         if (this.goalList.isEmpty()) {
-           try {
-            get().importGoals(this.filepath);
-            } catch(Exception e) {
+            try {
+                get().importGoals(this.filepath);
+            } catch(FileNotFoundException e) {
+                throw new NoImportedFileException();
+            } catch(IOException e) {
                 System.out.println(e);
-            } 
+            }
         }
         
-        this.seed.generate();
+        if (!this.goalList.isEmpty()) {
+            this.jsonSeed.generate();
+        }
+        else {
+            throw new NoImportedFileException();
+        }
+        
     }
 
     /**
@@ -113,10 +121,9 @@ public class BingoGen {
      * @throws sm63bingogen.NoGeneratedJsonException
      */
     public void copyToClipboard() throws NoGeneratedJsonException{
-        if (this.seed.isGenerated()) {
+        if (this.jsonSeed.isGenerated()) {
             TextTransfer textTransfer = new TextTransfer();
-            textTransfer.setClipboardContents(this.seed.getSeed());
-            System.out.println("Copied to clipboard !");
+            textTransfer.setClipboardContents(this.jsonSeed.getSeed());
         }
         else {
             // No JSON has been generated yet, so we display an error.

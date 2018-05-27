@@ -52,22 +52,22 @@
     </Container>
     <Component class="javax.swing.JFileChooser" name="fileChooser">
       <Properties>
-        <Property name="dialogTitle" type="java.lang.String" value="OpenDialog"/>
+        <Property name="dialogTitle" type="java.lang.String" value="Import goals..."/>
       </Properties>
     </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
+        <Menu class="javax.swing.JMenu" name="jm_file">
           <Properties>
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="jmi_importGoals">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Import goals..."/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmi_importGoalsActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -138,6 +138,7 @@
         <Property name="text" type="java.lang.String" value="Generate JSON"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jb_generateJSONMouseExited"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_generateJSONActionPerformed"/>
       </Events>
     </Component>
