@@ -23,7 +23,7 @@ public class BingoGen {
     // Goal list imported from the .txt file.
     private ArrayList<Goal> goalList;
     // JSON seed object.
-    private JSONSeed seed;
+    private JsonSeed seed;
     // Path of the goalList file.
     private String filepath;
     // Title of the window.
@@ -33,8 +33,16 @@ public class BingoGen {
     public ArrayList<Goal> getGoalList() {
         return goalList;
     }
+
+    public String getFilepath() {
+        return filepath;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
+    }
     
-    public JSONSeed getSeed() {
+    public JsonSeed getSeed() {
         return seed;
     }
     
@@ -48,10 +56,10 @@ public class BingoGen {
      */
     private BingoGen() {
         this.goalList = new ArrayList<>();
-        this.seed = new JSONSeed();
-        this.filepath = ".\\goalList.txt";
+        this.seed = new JsonSeed();
+        this.filepath = "";
         //this.filepath = "C:\\Users\\Kévin\\Documents\\GitHub\\SM63Hacks\\SM63BingoGen\\src\\sm63bingogen\\goalList.txt";
-        this.title = "SM63BingoGen 1.0-a3";
+        this.title = "SM63BingoGen 1.0-a4";
     }
     
     /**
@@ -85,7 +93,6 @@ public class BingoGen {
     
     /**
      * Generates a new seed.
-     * @param linebreak Decides whether the seed will contain linebreaks or not.
      */
     public void generate() {
         
@@ -103,6 +110,7 @@ public class BingoGen {
 
     /**
      * Copies the current JSON-generated code to the clipboard.
+     * @throws sm63bingogen.NoGeneratedJsonException
      */
     public void copyToClipboard() throws NoGeneratedJsonException{
         if (this.seed.isGenerated()) {
