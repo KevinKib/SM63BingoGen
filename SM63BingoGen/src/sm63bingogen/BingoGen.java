@@ -18,20 +18,17 @@ import java.util.ArrayList;
  */
 public class BingoGen {
 
-    /**
-     * Unique instance of the BingoGen class.
-     */
+    // Unique instance of the BingoGen class.
     private static BingoGen instance;
-    
-    /**
-     * Goal list imported from the .txt file.
-     */
+    // Goal list imported from the .txt file.
     private ArrayList<Goal> goalList;
-    
-    /**
-     * JSON seed object.
-     */
+    // JSON seed object.
     private JSONSeed seed;
+    // Path of the goalList file.
+    private String filepath;
+    // Title of the window.
+    private String title;
+    
     
     public ArrayList<Goal> getGoalList() {
         return goalList;
@@ -41,6 +38,10 @@ public class BingoGen {
         return seed;
     }
     
+    public String getTitle() {
+        return title;
+    }
+    
     
     /**
      * Constructor of the BingoGen class.
@@ -48,6 +49,9 @@ public class BingoGen {
     private BingoGen() {
         this.goalList = new ArrayList<>();
         this.seed = new JSONSeed();
+        this.filepath = ".\\goalList.txt";
+        //this.filepath = "C:\\Users\\Kévin\\Documents\\GitHub\\SM63Hacks\\SM63BingoGen\\src\\sm63bingogen\\goalList.txt";
+        this.title = "SM63BingoGen 1.0-a3";
     }
     
     /**
@@ -88,8 +92,7 @@ public class BingoGen {
         // Import goals (only if it hasn't been done before)
         if (this.goalList.isEmpty()) {
            try {
-            //get().importGoals("C:\\Users\\Kévin\\Documents\\GitHub\\SM63Hacks\\SM63BingoGen\\src\\sm63bingogen\\goalList.txt");
-            get().importGoals(".\\goalList.txt");
+            get().importGoals(this.filepath);
             } catch(Exception e) {
                 System.out.println(e);
             } 
@@ -101,7 +104,7 @@ public class BingoGen {
     /**
      * Copies the current JSON-generated code to the clipboard.
      */
-    public void copyToClipboard() {
+    public void copyToClipboard() throws NoGeneratedJsonException{
         if (this.seed.isGenerated()) {
             TextTransfer textTransfer = new TextTransfer();
             textTransfer.setClipboardContents(this.seed.getSeed());
@@ -109,7 +112,7 @@ public class BingoGen {
         }
         else {
             // No JSON has been generated yet, so we display an error.
-            System.out.println("No generated JSON.");
+            throw new NoGeneratedJsonException();
         }
         
     }
