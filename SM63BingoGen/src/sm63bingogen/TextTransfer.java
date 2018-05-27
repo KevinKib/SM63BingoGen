@@ -6,9 +6,11 @@
 package sm63bingogen;
 
 /**
- *
- * @author not me l0l
+ * Implements clipboard-related methods.
+ * http://www.javapractices.com/topic/TopicAction.do;jsessionid=8E8A62BBC50652649245BFD32735A71E?Id=82
+ * @author javapractices.com
  */
+
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.Transferable;

@@ -33,10 +33,10 @@ public class Interface extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        jButton1 = new javax.swing.JButton();
+        jb_generateJSON = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
+        jb_copyClipboard = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -52,10 +52,10 @@ public class Interface extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Generate JSON");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jb_generateJSON.setText("Generate JSON");
+        jb_generateJSON.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jb_generateJSONActionPerformed(evt);
             }
         });
 
@@ -63,10 +63,10 @@ public class Interface extends javax.swing.JFrame {
         textArea.setRows(5);
         jScrollPane1.setViewportView(textArea);
 
-        jButton2.setText("Copy to Clipboard");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jb_copyClipboard.setText("Copy to Clipboard");
+        jb_copyClipboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jb_copyClipboardActionPerformed(evt);
             }
         });
 
@@ -84,9 +84,9 @@ public class Interface extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(80, 80, 80)
-                .addComponent(jButton1)
+                .addComponent(jb_generateJSON)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(jb_copyClipboard)
                 .addGap(80, 80, 80))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(63, Short.MAX_VALUE)
@@ -98,8 +98,8 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jb_generateJSON)
+                    .addComponent(jb_copyClipboard))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
@@ -108,7 +108,7 @@ public class Interface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jb_generateJSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_generateJSONActionPerformed
         // TODO add your handling code here:
         
         //jTextField1.setText(BingoGen.get().generate());
@@ -119,12 +119,12 @@ public class Interface extends javax.swing.JFrame {
             System.out.println(e);
         }
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jb_generateJSONActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jb_copyClipboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_copyClipboardActionPerformed
         // TODO add your handling code here:
         BingoGen.get().copyToClipboard();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jb_copyClipboardActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,8 +165,6 @@ public class Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -176,6 +174,8 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jb_copyClipboard;
+    private javax.swing.JButton jb_generateJSON;
     private javax.swing.JTextArea textArea;
     // End of variables declaration//GEN-END:variables
 }

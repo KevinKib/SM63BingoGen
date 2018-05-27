@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 
 /**
- *
+ * Singleton design pattern.
  * @author Kévin
  */
 public class BingoGen {
@@ -23,12 +23,20 @@ public class BingoGen {
     private ArrayList<Goal> goalList;
     private ArrayList<Goal> currentGoalList;
     
-    
+    /**
+     * Constructor of the BingoGen class.
+     */
     private BingoGen() {
         this.goalList = new ArrayList<>();
         this.currentGoalList = new ArrayList<>();
     }
     
+    /**
+     * Imports all the goals from a .txt file.
+     * @param filename File path of the .txt file.
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public void importGoals(String filename) throws FileNotFoundException, IOException{
         this.goalList.clear();
         
@@ -38,15 +46,13 @@ public class BingoGen {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             
-
             while (line != null) {
                 this.goalList.add(new Goal(line));
                 sb.append(line);
                 sb.append(System.lineSeparator());
                 line = br.readLine();
             }
-            String everything = sb.toString();
-            //System.out.println(everything);
+            
         } finally {
             br.close();
         }
@@ -54,11 +60,14 @@ public class BingoGen {
         
     }
     
+    /**
+     * Fills the currentGoalList array with 25 new goals.
+     */
     private void fillCurrentGoalArray() {
-        int goalNum = 0;
+        int nbGoals = 0;
         
         // Has to give 25 goals
-        while (goalNum < 25) {
+        while (nbGoals < 25) {
             
             // Gives a value in the range of 0 and goalList.size()
             int randIndex = (int) Math.floor(Math.random() * (this.goalList.size()));
@@ -79,22 +88,32 @@ public class BingoGen {
             
             if(!this.currentGoalList.contains(newGoal)) {
                 this.currentGoalList.add(newGoal);
-                goalNum++;
+                nbGoals++;
             }
         }
         
-        assert (goalNum == 25);
+        assert (nbGoals == 25);
     }
     
+    /**
+     * Generates a new JSON seed.
+     * @param linebreak Decides if the seed will include linebreaks or not. (Linebreaks are used for the display in text areas)
+     * @return A functional JSON seed for Bingosync.
+     */
     public String generate(boolean linebreak) {
         
-        try {
-            BingoGen.get().importGoals("\\Users\\Kévin\\Documents\\NetBeansProjects\\SM63BingoGen\\src\\sm63bingogen\\goalList.txt");
-            //BingoGen.get().importGoals("./goalList.txt");
-        } catch(Exception e) {
-            System.out.println(e);
+        // Import goals (only if it hasn't been done before)
+        if (this.goalList.isEmpty()) {
+           try {
+            //BingoGen.get().importGoals("C:\\Users\\Kévin\\Documents\\GitHub\\SM63Hacks\\SM63BingoGen\\src\\sm63bingogen\\goalList.txt");
+            BingoGen.get().importGoals(".\\goalList.txt");
+            } catch(Exception e) {
+                System.out.println(e);
+            } 
         }
         
+        // If the code comes from the "Generate JSON" button, reinitiate the goal array.
+        // Will be rewritten
         if (linebreak) {
             this.currentGoalList.clear();
             this.fillCurrentGoalArray();
@@ -113,7 +132,8 @@ public class BingoGen {
         }
         
         /* We remove the two last characters,
-           which are a comma and a space */
+           which are a comma and a space.
+           We also remove the linebreak if there was one. */
         if (linebreak)  res = res.substring(0, res.length() - 3);
         else            res = res.substring(0, res.length() - 2);
         
@@ -122,6 +142,9 @@ public class BingoGen {
         return res;
     }
     
+    /**
+     * Copies the current JSON-generated code to the clipboard.
+     */
     public void copyToClipboard() {
         if (!this.currentGoalList.isEmpty()) {
             TextTransfer textTransfer = new TextTransfer();
@@ -135,6 +158,12 @@ public class BingoGen {
         
     }
     
+    /**
+     * Returns the instance of the BingoGen class.
+     * There can only be one instance at a time, so this method
+     * only creates an instance if none already exists.
+     * @return The unique instance of the BingoGen class.
+     */
     public static BingoGen get() {
         if (instance == null) {
             instance = new BingoGen();
