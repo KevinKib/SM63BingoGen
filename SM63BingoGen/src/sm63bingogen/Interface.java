@@ -113,8 +113,10 @@ public class Interface extends javax.swing.JFrame {
         
         //jTextField1.setText(BingoGen.get().generate());
         
+        BingoGen.get().generate();
+        
         try {
-           textArea.setText(BingoGen.get().generate(true));
+           textArea.setText(BingoGen.get().getSeed().getSeedLinebreak());
         } catch (Exception e) {
             System.out.println(e);
         }

@@ -18,17 +18,36 @@ import java.util.ArrayList;
  */
 public class BingoGen {
 
+    /**
+     * Unique instance of the BingoGen class.
+     */
     private static BingoGen instance;
     
+    /**
+     * Goal list imported from the .txt file.
+     */
     private ArrayList<Goal> goalList;
-    private ArrayList<Goal> currentGoalList;
+    
+    /**
+     * JSON seed object.
+     */
+    private JSONSeed seed;
+    
+    public ArrayList<Goal> getGoalList() {
+        return goalList;
+    }
+    
+    public JSONSeed getSeed() {
+        return seed;
+    }
+    
     
     /**
      * Constructor of the BingoGen class.
      */
     private BingoGen() {
         this.goalList = new ArrayList<>();
-        this.currentGoalList = new ArrayList<>();
+        this.seed = new JSONSeed();
     }
     
     /**
@@ -61,94 +80,31 @@ public class BingoGen {
     }
     
     /**
-     * Fills the currentGoalList array with 25 new goals.
+     * Generates a new seed.
+     * @param linebreak Decides whether the seed will contain linebreaks or not.
      */
-    private void fillCurrentGoalArray() {
-        int nbGoals = 0;
-        
-        // Has to give 25 goals
-        while (nbGoals < 25) {
-            
-            // Gives a value in the range of 0 and goalList.size()
-            int randIndex = (int) Math.floor(Math.random() * (this.goalList.size()));
-            
-            /*
-             * Manages a potential exception that would happen if Math.random() returned 1.
-             * In that case randIndex would be equal to the goalList size,
-             * which we'll call n.
-             * Considering the goalList values are indexed between 0 to n-1,
-             * having randIndex = n would cause an IndexOutOfBounds exception.
-             */
-            if (randIndex == this.goalList.size()) {
-                randIndex -= 1;
-                System.out.println("This exception never happens !");
-            }
-            
-            Goal newGoal = this.goalList.get(randIndex);
-            
-            if(!this.currentGoalList.contains(newGoal)) {
-                this.currentGoalList.add(newGoal);
-                nbGoals++;
-            }
-        }
-        
-        assert (nbGoals == 25);
-    }
-    
-    /**
-     * Generates a new JSON seed.
-     * @param linebreak Decides if the seed will include linebreaks or not. (Linebreaks are used for the display in text areas)
-     * @return A functional JSON seed for Bingosync.
-     */
-    public String generate(boolean linebreak) {
+    public void generate() {
         
         // Import goals (only if it hasn't been done before)
         if (this.goalList.isEmpty()) {
            try {
-            //BingoGen.get().importGoals("C:\\Users\\Kévin\\Documents\\GitHub\\SM63Hacks\\SM63BingoGen\\src\\sm63bingogen\\goalList.txt");
-            BingoGen.get().importGoals(".\\goalList.txt");
+            //get().importGoals("C:\\Users\\Kévin\\Documents\\GitHub\\SM63Hacks\\SM63BingoGen\\src\\sm63bingogen\\goalList.txt");
+            get().importGoals(".\\goalList.txt");
             } catch(Exception e) {
                 System.out.println(e);
             } 
         }
         
-        // If the code comes from the "Generate JSON" button, reinitiate the goal array.
-        // Will be rewritten
-        if (linebreak) {
-            this.currentGoalList.clear();
-            this.fillCurrentGoalArray();
-        }
-        
-        // JSON initiation
-        String res = "[ ";
-        
-        // Goal loop
-        for (Goal goal : this.currentGoalList) {
-            res += goal;
-            
-            // Character separation
-            if (linebreak) res += ", \n";
-            else res += ", ";
-        }
-        
-        /* We remove the two last characters,
-           which are a comma and a space.
-           We also remove the linebreak if there was one. */
-        if (linebreak)  res = res.substring(0, res.length() - 3);
-        else            res = res.substring(0, res.length() - 2);
-        
-        res += " ]";
-        
-        return res;
+        this.seed.generate();
     }
-    
+
     /**
      * Copies the current JSON-generated code to the clipboard.
      */
     public void copyToClipboard() {
-        if (!this.currentGoalList.isEmpty()) {
+        if (this.seed.isGenerated()) {
             TextTransfer textTransfer = new TextTransfer();
-            textTransfer.setClipboardContents(this.generate(false));
+            textTransfer.setClipboardContents(this.seed.getSeed());
             System.out.println("Copied to clipboard !");
         }
         else {
@@ -157,7 +113,7 @@ public class BingoGen {
         }
         
     }
-    
+
     /**
      * Returns the instance of the BingoGen class.
      * There can only be one instance at a time, so this method
@@ -170,5 +126,6 @@ public class BingoGen {
         }
         return instance;
     }
+    
     
 }
