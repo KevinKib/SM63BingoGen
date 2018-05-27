@@ -1,5 +1,7 @@
 package sm63bingogen;
 
+import java.awt.Dimension;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -64,6 +66,11 @@ public class Interface extends javax.swing.JFrame {
         jScrollPane1.setViewportView(textArea);
 
         jb_copyClipboard.setText("Copy to Clipboard");
+        jb_copyClipboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jb_copyClipboardMouseExited(evt);
+            }
+        });
         jb_copyClipboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_copyClipboardActionPerformed(evt);
@@ -125,8 +132,28 @@ public class Interface extends javax.swing.JFrame {
 
     private void jb_copyClipboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_copyClipboardActionPerformed
         // TODO add your handling code here:
-        BingoGen.get().copyToClipboard();
+        
+        Dimension size = jb_copyClipboard.getSize();
+        
+        try {
+            BingoGen.get().copyToClipboard();
+            jb_copyClipboard.setText("Copied !");  
+        }
+        catch(NoGeneratedJsonException e) {
+            jb_copyClipboard.setText("No JSON.");
+        }
+        
+        // Fixes the size of the button (bad)
+        jb_copyClipboard.setSize(size);
+        jb_copyClipboard.setPreferredSize(size);
+        jb_copyClipboard.setMaximumSize(size); 
+        
     }//GEN-LAST:event_jb_copyClipboardActionPerformed
+
+    private void jb_copyClipboardMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_copyClipboardMouseExited
+        // TODO add your handling code here:
+        jb_copyClipboard.setText("Copy to Clipboard");
+    }//GEN-LAST:event_jb_copyClipboardMouseExited
 
     /**
      * @param args the command line arguments
@@ -161,7 +188,7 @@ public class Interface extends javax.swing.JFrame {
                 //new Interface().setVisible(true);
                 Interface instance = new Interface();
                 instance.setVisible(true);
-                instance.setTitle("SM63BingoGen 1.0-a1");
+                instance.setTitle(BingoGen.get().getTitle());
             }
         });
     }
