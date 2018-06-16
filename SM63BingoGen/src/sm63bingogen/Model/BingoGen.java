@@ -30,29 +30,6 @@ public class BingoGen {
     private JsonSeed jsonSeed;
     // Path of the goalList file.
     private String filepath;
-    // Title of the window.
-    private String title;
-    
-    
-    public ArrayList<Goal> getGoalList() {
-        return goalList;
-    }
-
-    public String getFilepath() {
-        return filepath;
-    }
-
-    public void setFilepath(String filepath) {
-        this.filepath = filepath;
-    }
-    
-    public JsonSeed getJsonSeed() {
-        return jsonSeed;
-    }
-    
-    public String getTitle() {
-        return title;
-    }
     
     
     /**
@@ -62,8 +39,6 @@ public class BingoGen {
         this.goalList = new ArrayList<>();
         this.jsonSeed = new JsonSeed();
         this.filepath = "";
-        //this.filepath = "C:\\Users\\Kévin\\Documents\\GitHub\\SM63Hacks\\SM63BingoGen\\src\\sm63bingogen\\goalList.txt";
-        this.title = "SM63BingoGen 1.0";
     }
     
     /**
@@ -96,7 +71,7 @@ public class BingoGen {
     
     /**
      * Generates a new jsonSeed.
-     * @throws sm63bingogen.NoImportedFileException
+     * @throws sm63bingogen.Exceptions.NoImportedFileException
      */
     public void generate() throws NoImportedFileException {
         
@@ -122,7 +97,7 @@ public class BingoGen {
 
     /**
      * Copies the current JSON-generated code to the clipboard.
-     * @throws sm63bingogen.NoGeneratedJsonException
+     * @throws sm63bingogen.Exceptions.NoGeneratedJsonException
      */
     public void copyToClipboard() throws NoGeneratedJsonException{
         if (this.jsonSeed.isGenerated()) {
@@ -149,5 +124,22 @@ public class BingoGen {
         return instance;
     }
     
+    
+    
+    public ArrayList<Goal> getGoalList() {
+        return goalList;
+    }
+
+    public String getFilepath() {
+        return filepath;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
+    }
+    
+    public JsonSeed getJsonSeed() {
+        return jsonSeed;
+    }
     
 }

@@ -30,22 +30,6 @@ public class JsonSeed {
     
     private boolean isGenerated;
     
-    public ArrayList<Goal> getGoalList() {
-        return goalList;
-    }
-    
-    public String getSeed() {
-        return seed;
-    }
-    
-    public String getSeedLinebreak() {
-        return seedLinebreak;
-    }
-    
-    public boolean isGenerated() {
-        return isGenerated;
-    }
-    
     public JsonSeed() {
         this.goalList = new ArrayList<>();
         this.seed = "";
@@ -120,6 +104,22 @@ public class JsonSeed {
         this.seedLinebreak += " ]";
         
         this.isGenerated = true;
+    }
+    
+    public ArrayList<Goal> getGoalList() {
+        return goalList;
+    }
+    
+    public String getSeed() {
+        return seed;
+    }
+    
+    public String getSeedLinebreak() {
+        return seedLinebreak;
+    }
+    
+    public boolean isGenerated() {
+        return isGenerated;
     }
     
 }

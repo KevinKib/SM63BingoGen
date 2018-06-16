@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JFileChooser;
+import sm63bingogen.IHM.Message;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -239,7 +240,7 @@ public class Interface extends javax.swing.JFrame {
     private void jb_generateJSONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_generateJSONActionPerformed
         // TODO add your handling code here:
         
-        //jTextField1.setText(BingoGen.get().generate());
+        //jTextField1.setText(BingoGen.getInstance().generate());
         
         Dimension size = jb_generateJSON.getSize();
         
@@ -254,7 +255,7 @@ public class Interface extends javax.swing.JFrame {
             }
             
         } catch(NoImportedFileException e) {
-            jb_generateJSON.setText("No file.");
+            jb_generateJSON.setText(Message.getInstance().get("b_generateJson_error"));
         }
         
         // Fixes the size of the button (bad)
@@ -272,9 +273,9 @@ public class Interface extends javax.swing.JFrame {
         
         try {
             BingoGen.get().copyToClipboard();
-            jb_copyClipboard.setText("Copied !");  
+            jb_copyClipboard.setText(Message.getInstance().get("b_copyClipboard_valid"));  
         } catch(NoGeneratedJsonException e) {
-            jb_copyClipboard.setText("No JSON.");
+            jb_copyClipboard.setText(Message.getInstance().get("b_copyClipboard_error"));
         }
         
         // Fixes the size of the button (bad)
@@ -286,7 +287,7 @@ public class Interface extends javax.swing.JFrame {
 
     private void jb_copyClipboardMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_copyClipboardMouseExited
         // TODO add your handling code here:
-        jb_copyClipboard.setText("Copy to Clipboard");
+        jb_copyClipboard.setText(Message.getInstance().get("b_copyClipboard"));
     }//GEN-LAST:event_jb_copyClipboardMouseExited
 
     private void jmi_importGoalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_importGoalsActionPerformed
@@ -311,7 +312,7 @@ public class Interface extends javax.swing.JFrame {
 
     private void jb_generateJSONMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_generateJSONMouseExited
         // TODO add your handling code here:
-        jb_generateJSON.setText("Generate JSON");
+        jb_generateJSON.setText(Message.getInstance().get("b_generateJson"));
     }//GEN-LAST:event_jb_generateJSONMouseExited
 
     private void jm_aboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_aboutActionPerformed
@@ -319,7 +320,7 @@ public class Interface extends javax.swing.JFrame {
         jD_about.pack();
         jD_about.setVisible(true);
         jD_about.setTitle("About");
-        jTA_about.setText("\nSuper Mario 63 Bingo Generator version 1.0.\nCreated by Sekanor.\nReleased on 16/06/2018.");
+        jTA_about.setText(Message.getInstance().get("about"));
     }//GEN-LAST:event_jm_aboutActionPerformed
 
     private void jm_howToUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_howToUseActionPerformed
@@ -327,7 +328,7 @@ public class Interface extends javax.swing.JFrame {
         jD_howToUse.pack();
         jD_howToUse.setVisible(true);
         jD_howToUse.setTitle("How to Use");
-        jTA_howToUse.setText("\n1. Import your list of goals in .txt format.\n2. Generate your JSON board.\n3. Copy it into clipboard, and paste it in BingoSync.\n4. Enjoy !");
+        jTA_howToUse.setText(Message.getInstance().get("howToUse"));
     }//GEN-LAST:event_jm_howToUseActionPerformed
 
     /**
@@ -363,7 +364,7 @@ public class Interface extends javax.swing.JFrame {
                 //new Interface().setVisible(true);
                 Interface instance = new Interface();
                 instance.setVisible(true);
-                instance.setTitle(BingoGen.get().getTitle());
+                instance.setTitle(Message.getInstance().get("title"));
             }
         });
     }
