@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sm63bingogen;
+package sm63bingogen.Model;
 
+import sm63bingogen.Model.JsonSeed;
+import sm63bingogen.Model.Goal;
+import sm63bingogen.Exceptions.NoGeneratedJsonException;
+import sm63bingogen.Exceptions.NoImportedFileException;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

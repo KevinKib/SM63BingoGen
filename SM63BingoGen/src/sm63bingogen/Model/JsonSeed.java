@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sm63bingogen;
+package sm63bingogen.Model;
 
 import java.util.ArrayList;
 
@@ -12,6 +12,8 @@ import java.util.ArrayList;
  * @author Kévin
  */
 public class JsonSeed {
+    
+    private final int NB_GOALS = 25;
     
     /**
      * ArrayList that contains the goals of the JsonSeed.
@@ -58,7 +60,7 @@ public class JsonSeed {
         int nbGoals = 0;
         
         // Has to give 25 goals
-        while (nbGoals < 25) {
+        while (nbGoals < NB_GOALS) {
             
             // Gives a value in the range of 0 and goalList.size()
             int randIndex = (int) Math.floor(Math.random() * (BingoGen.get().getGoalList().size()));
@@ -90,8 +92,7 @@ public class JsonSeed {
      */
     public void generate() {
         
-        // If the code comes from the "Generate JSON" button, reinitiate the goal array.
-        // Will be rewritten
+        // Reinitiate the goal array.
         this.goalList.clear();
         this.fillGoalList();
         

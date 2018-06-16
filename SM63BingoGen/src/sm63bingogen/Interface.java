@@ -1,5 +1,8 @@
 package sm63bingogen;
 
+import sm63bingogen.Model.BingoGen;
+import sm63bingogen.Exceptions.NoGeneratedJsonException;
+import sm63bingogen.Exceptions.NoImportedFileException;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileReader;
@@ -43,6 +46,14 @@ public class Interface extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
         fileChooser = new javax.swing.JFileChooser();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jD_about = new javax.swing.JDialog();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTA_about = new javax.swing.JTextArea();
+        jD_howToUse = new javax.swing.JDialog();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTA_howToUse = new javax.swing.JTextArea();
         jb_generateJSON = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
@@ -50,7 +61,9 @@ public class Interface extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jm_file = new javax.swing.JMenu();
         jmi_importGoals = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
+        jm_help = new javax.swing.JMenu();
+        jm_howToUse = new javax.swing.JMenuItem();
+        jm_about = new javax.swing.JMenuItem();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -69,7 +82,59 @@ public class Interface extends javax.swing.JFrame {
 
         fileChooser.setDialogTitle("Import goals...");
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        jD_about.setMinimumSize(new java.awt.Dimension(400, 200));
+
+        jTA_about.setColumns(20);
+        jTA_about.setRows(5);
+        jScrollPane3.setViewportView(jTA_about);
+
+        javax.swing.GroupLayout jD_aboutLayout = new javax.swing.GroupLayout(jD_about.getContentPane());
+        jD_about.getContentPane().setLayout(jD_aboutLayout);
+        jD_aboutLayout.setHorizontalGroup(
+            jD_aboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jD_aboutLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jD_aboutLayout.setVerticalGroup(
+            jD_aboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jD_aboutLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(108, Short.MAX_VALUE))
+        );
+
+        jD_howToUse.setMinimumSize(new java.awt.Dimension(400, 200));
+
+        jTA_howToUse.setEditable(false);
+        jTA_howToUse.setColumns(20);
+        jTA_howToUse.setRows(5);
+        jScrollPane4.setViewportView(jTA_howToUse);
+
+        javax.swing.GroupLayout jD_howToUseLayout = new javax.swing.GroupLayout(jD_howToUse.getContentPane());
+        jD_howToUse.getContentPane().setLayout(jD_howToUseLayout);
+        jD_howToUseLayout.setHorizontalGroup(
+            jD_howToUseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jD_howToUseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jD_howToUseLayout.setVerticalGroup(
+            jD_howToUseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jD_howToUseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(76, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jb_generateJSON.setText("Generate JSON");
         jb_generateJSON.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -83,6 +148,7 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        textArea.setEditable(false);
         textArea.setColumns(20);
         textArea.setRows(5);
         jScrollPane1.setViewportView(textArea);
@@ -111,8 +177,25 @@ public class Interface extends javax.swing.JFrame {
 
         jMenuBar1.add(jm_file);
 
-        jMenu7.setText("About...");
-        jMenuBar1.add(jMenu7);
+        jm_help.setText("Help");
+
+        jm_howToUse.setText("How to use");
+        jm_howToUse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_howToUseActionPerformed(evt);
+            }
+        });
+        jm_help.add(jm_howToUse);
+
+        jm_about.setText("About ...");
+        jm_about.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_aboutActionPerformed(evt);
+            }
+        });
+        jm_help.add(jm_about);
+
+        jMenuBar1.add(jm_help);
 
         setJMenuBar(jMenuBar1);
 
@@ -121,15 +204,16 @@ public class Interface extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(jb_generateJSON)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jb_copyClipboard)
-                .addGap(80, 80, 80))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
+                .addContainerGap(58, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jb_generateJSON)
+                        .addGap(59, 59, 59)
+                        .addComponent(jb_copyClipboard)
+                        .addGap(80, 80, 80))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,7 +243,6 @@ public class Interface extends javax.swing.JFrame {
             try {
                 textArea.setText(BingoGen.get().getJsonSeed().getSeedLinebreak());
             } catch (Exception e) {
-                System.out.println("dicks");
                 System.out.println(e);
                 
             }
@@ -225,6 +308,20 @@ public class Interface extends javax.swing.JFrame {
         jb_generateJSON.setText("Generate JSON");
     }//GEN-LAST:event_jb_generateJSONMouseExited
 
+    private void jm_aboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_aboutActionPerformed
+        // TODO add your handling code here:
+        jD_about.setVisible(true);
+        jD_about.setTitle("About");
+        jTA_about.setText("\nSuper Mario 63 Bingo Generator version 1.0.\nCreated by Sekanor.\nReleased on 16/06/2018.");
+    }//GEN-LAST:event_jm_aboutActionPerformed
+
+    private void jm_howToUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_howToUseActionPerformed
+        // TODO add your handling code here:
+        jD_howToUse.setVisible(true);
+        jD_howToUse.setTitle("How to Use");
+        jTA_howToUse.setText("\n1. Import your list of goals in .txt format.\n2. Generate your JSON board.\n3. Copy it into clipboard, and paste it in BingoSync.\n4. Enjoy !");
+    }//GEN-LAST:event_jm_howToUseActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -266,19 +363,29 @@ public class Interface extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JDialog jD_about;
+    private javax.swing.JDialog jD_howToUse;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextArea jTA_about;
+    private javax.swing.JTextArea jTA_howToUse;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton jb_copyClipboard;
     private javax.swing.JButton jb_generateJSON;
+    private javax.swing.JMenuItem jm_about;
     private javax.swing.JMenu jm_file;
+    private javax.swing.JMenu jm_help;
+    private javax.swing.JMenuItem jm_howToUse;
     private javax.swing.JMenuItem jmi_importGoals;
     private javax.swing.JTextArea textArea;
     // End of variables declaration//GEN-END:variables
