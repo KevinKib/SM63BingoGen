@@ -86,7 +86,11 @@ public class Interface extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
-        jD_about.setMinimumSize(new java.awt.Dimension(400, 200));
+        jD_about.setLocationByPlatform(true);
+        jD_about.setMaximumSize(new java.awt.Dimension(400, 300));
+        jD_about.setMinimumSize(new java.awt.Dimension(400, 100));
+        jD_about.setPreferredSize(new java.awt.Dimension(400, 150));
+        jD_about.setResizable(false);
 
         jTA_about.setColumns(20);
         jTA_about.setRows(5);
@@ -105,11 +109,13 @@ public class Interface extends javax.swing.JFrame {
             jD_aboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jD_aboutLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jD_howToUse.setMinimumSize(new java.awt.Dimension(400, 200));
+        jD_howToUse.setMaximumSize(new java.awt.Dimension(400, 300));
+        jD_howToUse.setMinimumSize(new java.awt.Dimension(400, 100));
+        jD_howToUse.setResizable(false);
 
         jTA_howToUse.setEditable(false);
         jTA_howToUse.setColumns(20);
@@ -130,7 +136,7 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(jD_howToUseLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -310,6 +316,7 @@ public class Interface extends javax.swing.JFrame {
 
     private void jm_aboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_aboutActionPerformed
         // TODO add your handling code here:
+        jD_about.pack();
         jD_about.setVisible(true);
         jD_about.setTitle("About");
         jTA_about.setText("\nSuper Mario 63 Bingo Generator version 1.0.\nCreated by Sekanor.\nReleased on 16/06/2018.");
@@ -317,6 +324,7 @@ public class Interface extends javax.swing.JFrame {
 
     private void jm_howToUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_howToUseActionPerformed
         // TODO add your handling code here:
+        jD_howToUse.pack();
         jD_howToUse.setVisible(true);
         jD_howToUse.setTitle("How to Use");
         jTA_howToUse.setText("\n1. Import your list of goals in .txt format.\n2. Generate your JSON board.\n3. Copy it into clipboard, and paste it in BingoSync.\n4. Enjoy !");

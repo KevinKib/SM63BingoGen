@@ -63,7 +63,7 @@ public class BingoGen {
         this.jsonSeed = new JsonSeed();
         this.filepath = "";
         //this.filepath = "C:\\Users\\Kévin\\Documents\\GitHub\\SM63Hacks\\SM63BingoGen\\src\\sm63bingogen\\goalList.txt";
-        this.title = "SM63BingoGen 1.0-a5";
+        this.title = "SM63BingoGen 1.0";
     }
     
     /**
