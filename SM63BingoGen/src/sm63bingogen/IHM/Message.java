@@ -19,7 +19,7 @@ public class Message {
     private Message() {
         this.messageList = new HashMap<>();
         
-        addMessage("title","SM63BingoGen 1.0");
+        addMessage("title","SM63BingoGen 1.0.1");
         
         addMessage("about", "\nSuper Mario 63 Bingo Generator version 1.0.\nCreated by Sekanor.\nReleased on 16/06/2018.");
         addMessage("howToUse","\n1. Import your list of goals in .txt format.\n2. Generate your JSON board.\n3. Copy it into clipboard, and paste it in BingoSync.\n4. Enjoy !");

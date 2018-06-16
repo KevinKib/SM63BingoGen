@@ -93,6 +93,7 @@ public class Interface extends javax.swing.JFrame {
         jD_about.setPreferredSize(new java.awt.Dimension(400, 150));
         jD_about.setResizable(false);
 
+        jTA_about.setEditable(false);
         jTA_about.setColumns(20);
         jTA_about.setRows(5);
         jScrollPane3.setViewportView(jTA_about);
