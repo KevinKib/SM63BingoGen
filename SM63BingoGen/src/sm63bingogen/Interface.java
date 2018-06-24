@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JFileChooser;
 import sm63bingogen.IHM.Message;
+import sm63bingogen.Model.TextEdit;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -59,6 +60,7 @@ public class Interface extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
         jb_copyClipboard = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jm_file = new javax.swing.JMenu();
         jmi_importGoals = new javax.swing.JMenuItem();
@@ -89,8 +91,8 @@ public class Interface extends javax.swing.JFrame {
 
         jD_about.setLocationByPlatform(true);
         jD_about.setMaximumSize(new java.awt.Dimension(400, 300));
-        jD_about.setMinimumSize(new java.awt.Dimension(400, 100));
-        jD_about.setPreferredSize(new java.awt.Dimension(400, 150));
+        jD_about.setMinimumSize(new java.awt.Dimension(100, 100));
+        jD_about.setPreferredSize(new java.awt.Dimension(325, 150));
         jD_about.setResizable(false);
 
         jTA_about.setEditable(false);
@@ -104,8 +106,8 @@ public class Interface extends javax.swing.JFrame {
             jD_aboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jD_aboutLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jD_aboutLayout.setVerticalGroup(
             jD_aboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,8 +117,8 @@ public class Interface extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jD_howToUse.setMaximumSize(new java.awt.Dimension(400, 300));
-        jD_howToUse.setMinimumSize(new java.awt.Dimension(400, 100));
+        jD_howToUse.setMaximumSize(new java.awt.Dimension(500, 300));
+        jD_howToUse.setMinimumSize(new java.awt.Dimension(300, 100));
         jD_howToUse.setResizable(false);
 
         jTA_howToUse.setEditable(false);
@@ -130,15 +132,15 @@ public class Interface extends javax.swing.JFrame {
             jD_howToUseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jD_howToUseLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jD_howToUseLayout.setVerticalGroup(
             jD_howToUseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jD_howToUseLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -170,6 +172,12 @@ public class Interface extends javax.swing.JFrame {
         jb_copyClipboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_copyClipboardActionPerformed(evt);
+            }
+        });
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
             }
         });
 
@@ -211,7 +219,7 @@ public class Interface extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(58, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -220,7 +228,9 @@ public class Interface extends javax.swing.JFrame {
                         .addComponent(jb_copyClipboard)
                         .addGap(80, 80, 80))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(67, 67, 67))))
         );
         layout.setVerticalGroup(
@@ -232,7 +242,9 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(jb_copyClipboard))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6))
+                .addGap(15, 15, 15)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -322,15 +334,20 @@ public class Interface extends javax.swing.JFrame {
         jD_about.setVisible(true);
         jD_about.setTitle("About");
         jTA_about.setText(Message.getInstance().get("about"));
+        TextEdit.centerText(jTA_about);
     }//GEN-LAST:event_jm_aboutActionPerformed
 
     private void jm_howToUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_howToUseActionPerformed
         // TODO add your handling code here:
         jD_howToUse.pack();
         jD_howToUse.setVisible(true);
-        jD_howToUse.setTitle("How to Use");
+        jD_howToUse.setTitle("How to use");
         jTA_howToUse.setText(Message.getInstance().get("howToUse"));
     }//GEN-LAST:event_jm_howToUseActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -390,6 +407,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JTextArea jTA_about;
     private javax.swing.JTextArea jTA_howToUse;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jb_copyClipboard;
     private javax.swing.JButton jb_generateJSON;
     private javax.swing.JMenuItem jm_about;

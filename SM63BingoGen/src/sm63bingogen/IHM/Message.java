@@ -31,11 +31,17 @@ public class Message {
                 + "Created by Sekanor.\n"
                 + "Released on 16/06/2018.");
         
-        addMessage("howToUse","\n"
-                + "1. Import your list of goals in .txt format.\n"
-                + "2. Generate your JSON board.\n"
-                + "3. Copy it into clipboard, and paste it in BingoSync.\n"
-                + "4. Enjoy !");
+        addMessage("howToUse",
+                  "This program allows to generate BingoSync boards for any game.\n"
+                + "To do so, follow these steps :\n\n"
+                + "  1. Import your list of goals in .txt format, using 'File -> Import goals'.\n"
+                + "  2. Generate your board using the 'Generate JSON' button.\n"
+                + "  3. Copy it into clipboard.\n"
+                + "  4. Go to https://bingosync.com/ .\n"
+                + "  5. In the 'Game' field, but 'Custom (Advanced)'.\n"
+                + "  6. In the 'Board' field that just appeared, paste your text.\n"
+                + "  7. Finish the creation of your room.\n"
+                + "  8. Enjoy !");
         
         addMessage("b_generateJson","Generate JSON");
         addMessage("b_generateJson_error","No file.");
