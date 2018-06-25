@@ -6,6 +6,7 @@
 package sm63bingogen.Model;
 
 import java.util.ArrayList;
+import sm63bingogen.Model.Randomizer.*;
 
 /**
  *
@@ -13,62 +14,29 @@ import java.util.ArrayList;
  */
 public class JsonSeed {
     
+    // Constant that indicates the number of goals in a seed.
     private final int NB_GOALS = 25;
     
-    /**
-     * ArrayList that contains the goals of the JsonSeed.
-     */
+    // ArrayList that contains the goals of the JsonSeed.
     private ArrayList<Goal> goalList;
-    /**
-     * Functional JSON seed for BingoSync.
-     */
+    
+    //Functional JSON seed for BingoSync.
     private String seed;
-    /**
-     * JSON seed with linebreaks used for display.
-     */
+    
+    // JSON seed with linebreaks used for display.
     private String seedLinebreak;
     
+    // Boolean that checks if a seed has been generated.
     private boolean isGenerated;
+    
+    private GoalFiller goalFiller;
     
     public JsonSeed() {
         this.goalList = new ArrayList<>();
         this.seed = "";
         this.seedLinebreak = "";
         this.isGenerated = false;
-    }
-
-    /**
-     * Fills the goalList array with 25 new goals.
-     */
-    private void fillGoalList() {
-        int nbGoals = 0;
-        
-        // Has to give 25 goals
-        while (nbGoals < NB_GOALS) {
-            
-            // Gives a value in the range of 0 and goalList.size()
-            int randIndex = (int) Math.floor(Math.random() * (BingoGen.get().getGoalList().size()));
-            
-            /*
-             * Manages a potential exception that would happen if Math.random() returned 1.
-             * In that case randIndex would be equal to the goalList size,
-             * which we'll call n.
-             * Considering the goalList values are indexed between 0 to n-1,
-             * having randIndex = n would cause an IndexOutOfBounds exception.
-             */
-            if (randIndex == BingoGen.get().getGoalList().size()) {
-                randIndex -= 1;
-            }
-            
-            Goal newGoal = BingoGen.get().getGoalList().get(randIndex);
-            
-            if(!this.goalList.contains(newGoal)) {
-                this.goalList.add(newGoal);
-                nbGoals++;
-            }
-        }
-        
-        assert (nbGoals == 25);
+        this.goalFiller = new Ordered_Selector();
     }
     
     /**
@@ -78,7 +46,7 @@ public class JsonSeed {
         
         // Reinitiate the goal array.
         this.goalList.clear();
-        this.fillGoalList();
+        this.goalFiller.fillGoalList(this.goalList, NB_GOALS);
         
         // JSON initiation
         this.seed = "[ ";

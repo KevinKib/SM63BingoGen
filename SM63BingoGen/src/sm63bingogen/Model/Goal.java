@@ -14,11 +14,15 @@ public class Goal {
     // Might feature a weight attribute in the future.
     
     private String name;
-    private int difficulty;
+    private int length;
     
     public Goal(String name) {
+        this(name, 1);
+    }
+    
+    public Goal(String name, int length) {
         this.name = name;
-        this.difficulty = 1;
+        this.length = length;
     }
 
     public String getName() {
@@ -27,6 +31,10 @@ public class Goal {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getLength() {
+        return length;
     }
     
     public String toString() {

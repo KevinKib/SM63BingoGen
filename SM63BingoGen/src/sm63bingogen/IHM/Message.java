@@ -38,7 +38,7 @@ public class Message {
                 + "  2. Generate your board using the 'Generate JSON' button.\n"
                 + "  3. Copy it into clipboard.\n"
                 + "  4. Go to https://bingosync.com/ .\n"
-                + "  5. In the 'Game' field, but 'Custom (Advanced)'.\n"
+                + "  5. In the 'Game' field, put 'Custom (Advanced)'.\n"
                 + "  6. In the 'Board' field that just appeared, paste your text.\n"
                 + "  7. Finish the creation of your room.\n"
                 + "  8. Enjoy !");
