@@ -17,15 +17,26 @@ public class Random implements GoalFiller {
 
     @Override
     public void fillGoalList(ArrayList<Goal> goalList, int nbExpectedGoals) {
+        this.fillGoalList(goalList, nbExpectedGoals, null);
+    }
+    
+    public void fillGoalList(ArrayList<Goal> goalList, int nbExpectedGoals, ArrayList<Goal> totalGoalList) {
         int nbGoals = 0;
         
         // Has to give x number of goals
         while (nbGoals < nbExpectedGoals) {
             
             // Gives a value in the range of 0 and goalList.size()
-            int randIndex = (int) Math.floor(Math.random() * (BingoGen.get().getGoalList().size()));
+            Goal newGoal;
             
-            Goal newGoal = BingoGen.get().getGoalList().get(randIndex);
+            if (totalGoalList == null) {
+                int randIndex = (int) Math.floor(Math.random() * (BingoGen.get().getGoalList().size()));
+                newGoal = BingoGen.get().getGoalList().get(randIndex);
+            }
+            else {
+                int randIndex = (int) Math.floor(Math.random() * (totalGoalList.size()));
+                newGoal = totalGoalList.get(randIndex);
+            }
             
             if(!goalList.contains(newGoal)) {
                 goalList.add(newGoal);

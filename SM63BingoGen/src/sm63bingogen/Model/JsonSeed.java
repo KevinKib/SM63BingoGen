@@ -36,7 +36,7 @@ public class JsonSeed {
         this.seed = "";
         this.seedLinebreak = "";
         this.isGenerated = false;
-        this.goalFiller = new Ordered_Selector();
+        this.goalFiller = new Ordered_Swap();
     }
     
     /**

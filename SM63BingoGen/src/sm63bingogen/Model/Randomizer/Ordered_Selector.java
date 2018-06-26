@@ -25,10 +25,16 @@ public class Ordered_Selector implements GoalFiller {
     @Override
     public void fillGoalList(ArrayList<Goal> goalList, int nbExpectedGoals) {
         
+        // Generate a list of 25 goals that will stay fixed
+        Random random = new Random();
+        
+        ArrayList<Goal> currentGoals = new ArrayList<>();
+        random.fillGoalList(currentGoals, nbExpectedGoals);
+        
         ArrayList<Goal> currentList = new ArrayList<>();
         ArrayList<Goal> calculatedList = new ArrayList<>();
         double bestStandardDeviation = -1;
-        Random random = new Random();
+        
         
         // Fix the excluded goal exploit (re-use the same goals everytime)
         
@@ -39,7 +45,6 @@ public class Ordered_Selector implements GoalFiller {
             
             // Calculate standard deviation
             double standardDeviation = standardDeviation(currentList);
-            System.out.println(standardDeviation);
             
             if (i == 0 || standardDeviation < bestStandardDeviation) {
                 calculatedList.clear();
@@ -64,7 +69,7 @@ public class Ordered_Selector implements GoalFiller {
         // Subtract, pow
         sum = 0;
         double goalLength;
-        goalList.addAll(goalList);
+        
         for (Goal goal : goalList) {
             goalLength = goal.getLength() - avg;
             goalLength = Math.pow(goalLength, 2);
