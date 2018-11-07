@@ -1,1 +1,1 @@
-# SM63Hacks
+# SM63BingoGen
